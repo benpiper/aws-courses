@@ -1,0 +1,11 @@
+aws acm list-certificates
+aws cloudformation validate-template --template-body file://app-stack.json
+aws cloudformation validate-template --template-body file://network-stack.json
+aws s3 cp network-stack.json s3://benpiper.com-cftemplates
+aws cloudformation deploy --template-file "app-stack.json" --stack-name "app-stack"
+aws cloudformation describe-stacks
+aws cloudformation describe-stacks --stack-name "app-stack"
+aws autoscaling describe-auto-scaling-instances
+aws ec2 terminate-instances --instance-ids i-066e79539a30fe3d4 i-0cb17e8220f4db95e
+aws cloudformation delete-stack --stack-name "app-stack"
+aws cloudformation describe-stacks

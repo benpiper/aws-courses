@@ -1,30 +1,30 @@
 ; Allocating an elastic IP address
 aws ec2 allocate-address
-aws ec2 release-address --allocation-id 
+aws ec2 release-address --allocation-id eipalloc-02560c5aadffea3a4
 aws ec2 describe-addresses
 
 ; Launching an instance into a public subnet
 aws ec2 describe-subnets --filters Name=cidr-block,Values="10.0.11.0/24"
-aws ec2 run-instances --image-id ami-01d025118d8e760db --subnet-id  --instance-type t3.micro --key-name ccnetkeypair
+aws ec2 run-instances --image-id ami-01d025118d8e760db --subnet-id subnet-02339ad9c1c99be06 --instance-type t3.micro --key-name ccnetkeypair
 aws ec2 allocate-address
-aws ec2 associate-address --instance-id  --allocation-id 
-aws ec2 describe-addresses --allocation-ids 
-aws ec2 terminate-instances --instance-ids 
-aws ec2 release-address --allocation-id 
+aws ec2 associate-address --instance-id i-01c2f12844d3ec308 --allocation-id eipalloc-069539ad21ccde3f0
+aws ec2 describe-addresses --allocation-ids eipalloc-069539ad21ccde3f0
+aws ec2 terminate-instances --instance-ids i-01c2f12844d3ec308
+aws ec2 release-address --allocation-id eipalloc-069539ad21ccde3f0
 
 ; Deleting the NAT gateway
 aws ec2 describe-nat-gateways
-aws ec2 delete-nat-gateway --nat-gateway-id 
-aws ec2 release-address --allocation-id 
+aws ec2 delete-nat-gateway --nat-gateway-id nat-0525fda0d965ef897
+aws ec2 release-address --allocation-id eipalloc-05dd6259e7e6de4f9
 
-; Direct Connect and Transit Gateway
+; Transit Gateway
 aws ec2 create-transit-gateway
 aws ec2 create-vpc --cidr-block 172.27.0.0/16
-aws ec2 create-subnet --vpc-id  --cidr-block 172.27.1.0/24 --availability-zone us-east-1a
-aws ec2 create-transit-gateway-vpc-attachment --transit-gateway-id  --vpc-id  --subnet-ids 
+aws ec2 create-subnet --vpc-id vpc-0b438585262e33457 --cidr-block 172.27.1.0/24 --availability-zone us-east-1a
+aws ec2 create-transit-gateway-vpc-attachment --transit-gateway-id tgw-03029e5333e7289d8 --vpc-id vpc-0b438585262e33457 --subnet-ids subnet-0065879a561d89b38
 aws ec2 create-vpc --cidr-block 172.28.0.0/16
-aws ec2 create-subnet --vpc-id  --cidr-block 172.28.1.0/24 --availability-zone us-east-1a
-aws ec2 create-transit-gateway-vpc-attachment --transit-gateway-id  --vpc-id  --subnet-ids 
-aws ec2 search-transit-gateway-routes --transit-gateway-route-table-id tgw-rtb-01e158d45848e8522 --filters "Name=type,Values=static,propagated"
+aws ec2 create-subnet --vpc-id vpc-0698213dd6e8f1797 --cidr-block 172.28.1.0/24 --availability-zone us-east-1a
+aws ec2 create-transit-gateway-vpc-attachment --transit-gateway-id tgw-03029e5333e7289d8 --vpc-id vpc-0698213dd6e8f1797 --subnet-ids subnet-005843dbc1e594791
+aws ec2 search-transit-gateway-routes --transit-gateway-route-table-id  --filters "Name=type,Values=static,propagated"
 aws ec2 describe-transit-gateways
-aws ec2 search-transit-gateway-routes --transit-gateway-route-table-id tgw-rtb-0ef0345df00016c92 --filters "Name=type,Values=static,propagated"
+aws ec2 search-transit-gateway-routes --transit-gateway-route-table-id  --filters "Name=type,Values=static,propagated"

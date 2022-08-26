@@ -1,11 +1,11 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "CloudFormation template that creates launch templates, Auto Scaling groups, and application load balancers.",
+    "Description": "CloudFormation template that creates launch templates, Auto Scaling groups, and application load balancers",
     "Parameters": {
         "ALBCertificateArn": {
             "Description": "ARN of ACM TLS certificate",
             "Type": "String",
-            "Default": "arn:aws:acm:us-east-1:158826777352:certificate/20037ff5-bdb0-48b5-9748-efa23f8c21fd",
+            "Default": "arn:aws:acm:us-east-1:158826777352:certificate/89e545ef-95a0-4353-947f-8fe3435af6ec",
             "ConstraintDescription": "must be a valid ARN"
         },
         "WebTierInstanceType": {

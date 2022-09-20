@@ -212,7 +212,7 @@
                                         "AppTierLoadBalancer",
                                         "DNSName"
                                     ]}, ":8080' benpiper/mtwa:web\n",
-                                    "/opt/aws/bin/cfn-signal -e 0 --stack ", { "Ref": "AWS::StackName" }," --resource WebserverGroup\n"
+                                    "/opt/aws/bin/cfn-signal -e 0 --stack ", { "Ref": "AWS::StackName" }," --resource WebserverGroup --region us-east-1\n"
                                 ]
                             ]
                         }
@@ -386,7 +386,7 @@
                                         "sudo yum -y install docker aws-cfn-bootstrap\n",
                                         "sudo service docker start\n",
                                         "sudo docker run -d -p 8080:8080 benpiper/mtwa:app\n",
-                                        "/opt/aws/bin/cfn-signal -e 0 --stack ", { "Ref": "AWS::StackName" }," --resource AppserverGroup\n"
+                                        "/opt/aws/bin/cfn-signal -e 0 --stack ", { "Ref": "AWS::StackName" }," --resource AppserverGroup --region us-east-1\n"
                                     ]
                                 ]
                             }
